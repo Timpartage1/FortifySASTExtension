@@ -1,0 +1,25 @@
+{
+    "manifest_version": 3,
+    "name": "Code Saver",
+    "version": "1.0",
+    "description": "Save the source code of the active tab locally.",
+    "permissions": ["activeTab", "storage"],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"]
+      }
+    ],
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+        "16": "images/fortify16.png",
+        "48": "images/fortify48.png",
+        "128": "images/fortify128.png"
+      }
+    }
+  }
+  
