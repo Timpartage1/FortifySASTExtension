@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Extractor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #progress-container {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #progress-bar {
+            width: 0;
+            height: 20px;
+            background-color: #4CAF50;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#extract-btn').on('click', function () {
+                $('#progress-container').show();
+                $('#progress-bar').width('0%');
+
+                // Simulate extracting source code (replace with actual logic)
+                var sourceCode = "<html><head><title>Sample Page</title></head><body><h1>Hello, World!</h1></body></html>";
+
+                // Save to disk
+                saveToLocalDisk(sourceCode);
+
+                // Send to Git repository (replace 'your_git_endpoint' with the actual endpoint)
+                sendToGitRepository(sourceCode, 'your_git_endpoint');
+            });
+
+            function saveToLocalDisk(sourceCode) {
+                // Simulate saving to local disk (replace with actual logic)
+                console.log("Saving to local disk...");
+                // Add your logic to save the source code to the local disk here
+            }
+
+            function sendToGitRepository(sourceCode, gitEndpoint) {
+                // Simulate sending to Git repository (replace with actual AJAX call)
+                console.log("Sending to Git repository...");
+
+                // AJAX request to send data to the Git repository
+                $.ajax({
+                    url: gitEndpoint,
+                    method: 'POST',
+                    data: { sourceCode: sourceCode },
+                    success: function (response) {
+                        console.log("Successfully sent to Git repository:", response);
+                    },
+                    error: function (error) {
+                        console.error("Error sending to Git repository:", error);
+                    },
+                    complete: function () {
+                        // Hide the progress bar after completion
+                        $('#progress-container').hide();
+                    },
+                    xhr: function () {
+                        var xhr = new window.XMLHttpRequest();
+                        // Upload progress
+                        xhr.upload.addEventListener("progress", function (evt) {
+                            if (evt.lengthComputable) {
+                                var percentComplete = (evt.loaded / evt.total) * 100;
+                                $('#progress-bar').width(percentComplete + '%');
+                            }
+                        }, false);
+                        return xhr;
+                    }
+                });
+            }
+        });
+    </script>
+</head>
+<body>
+    <button id="extract-btn">Extract</button>
+
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+</body>
+</html>
