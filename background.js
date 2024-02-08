@@ -1,20 +1,20 @@
-chrome.runtime.onInstalled.addListener(function () {
-    console.log("Code Saver Extension Installed");
-  });
+// background.js
 
-  chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-    if (message.action === "saveCode") {
-      // Save the source code locally (you can customize the saving logic here)
-      saveCodeLocally(message.sourceCode);
-    }
-  });
+chrome.runtime.onConnect.addListener(function(port) {
+    port.onMessage.addListener(function(message) {
+      if (message.action === "saveCode") {
+        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+          if (tabs && tabs.length > 0 && tabs[0].id) {
+            console.log("Found active tab with ID:", tabs[0].id);
   
-  function saveCodeLocally(code) {
-    // Implement your logic to save the code locally using Ajax, jQuery, or any other method
-    // Example: You can use the 'chrome.storage.local' API to store the code
-    chrome.storage.local.set({ savedCode: code }, function () {
-      console.log("Code saved locally.");
+            // Send the message directly to the content script using port
+            chrome.tabs.sendMessage(tabs[0].id, { action: "saveCode", sourceCode: message.sourceCode });
+            console.log("I am receiving the message");
+          } else {
+            console.error("Unable to find an active tab to send the message.");
+          }
+        });
+      }
     });
-  }
-  
+  });
   
