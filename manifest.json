@@ -3,9 +3,10 @@
     "name": "Code Saver",
     "version": "1.0",
     "description": "Save the source code of the active tab locally.",
-    "permissions": ["activeTab", "storage", "downloads"],
+    "permissions": ["activeTab", "storage","scripting"],
     "background": {
-      "service_worker": "background.js"
+      "service_worker": "background.js",
+      "persistent":true
     },
     "content_scripts": [
       {

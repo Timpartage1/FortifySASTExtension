@@ -1,20 +1,18 @@
 // background.js
 
-chrome.runtime.onConnect.addListener(function(port) {
-    port.onMessage.addListener(function(message) {
-      if (message.action === "saveCode") {
-        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-          if (tabs && tabs.length > 0 && tabs[0].id) {
-            console.log("Found active tab with ID:", tabs[0].id);
-  
-            // Send the message directly to the content script using port
-            chrome.tabs.sendMessage(tabs[0].id, { action: "saveCode", sourceCode: message.sourceCode });
-            console.log("I am receiving the message");
-          } else {
-            console.error("Unable to find an active tab to send the message.");
-          }
-        });
-      }
-    });
-  });
-  
+let savedCode = ""; // Variable to store the source code
+
+// Listen for messages from the content script or popup script
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+    if (message.action === "saveCode") {
+        // Save the source code
+        savedCode = message.sourceCode;
+        console.log("Saved source code:", savedCode);
+        // You can perform additional processing or saving logic here
+    }
+});
+
+// Example: You might want to expose a function to retrieve the saved code
+function getSavedCode() {
+    return savedCode;
+}
