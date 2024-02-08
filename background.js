@@ -3,8 +3,11 @@ let savedCode = ""; // Variable to store the source code
 // Listen for messages from the content script or popup script
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     if (message.action === "saveCode") {
+        // Convert the source code to a string
+        const sourceCodeString = JSON.stringify(message.sourceCode);
+
         // Save the source code
-        savedCode = message.sourceCode;
+        savedCode = String(sourceCodeString);
         console.log("Saved source code:", savedCode);
 
         // Trigger download
@@ -20,11 +23,17 @@ function getSavedCode() {
 }
 
 function downloadCode(code) {
+    console.log("Code for download:", code);
+
     chrome.downloads.download({
         url: 'data:text/html;charset=utf-8,' + encodeURIComponent(code),
         filename: 'saved_code.html',
         saveAs: false
     }, function (downloadId) {
-        // Handle download completion if needed
+        if (chrome.runtime.lastError) {
+            console.error("Download error:", chrome.runtime.lastError);
+        } else {
+            console.log("Download successful. Download ID:", downloadId);
+        }
     });
 }
