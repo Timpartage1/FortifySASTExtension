@@ -1,0 +1,67 @@
+24.4.0  24.4.1 hf2
+ 
+./mjpg_streamer -i "./input_uvc.so" -o "./output_http.so -w ./www"
+ 
+git clone https://github.com/jacksonliam/mjpg-streamer.git
+ 
+overlayroot=tmpfs
+ 
+sudo apt install libjpeg-dev
+ 
+working 
+ 
+cd ~
+
+git clone https://github.com/jacksonliam/mjpg-streamer.git
+
+cd mjpg-streamer/mjpg-streamer-experimental
+
+mkdir _build && cd _build
+
+cmake ..
+
+make
+GitHub - jacksonliam/mjpg-streamer: Fork of http://sourceforge.net/projects/mjpg-streamer/
+Fork of http://sourceforge.net/projects/mjpg-streamer/ - jacksonliam/mjpg-streamer
+ 
+./mjpg_streamer -i "./plugins/input_uvc/input_uvc.so -r 1280x720 -f 15" -o "./plugins/output_http/output_http.so -w ../www"
+ 
+ngrok config add-authtoken 2mq7GT1hDCMlDHRwZT4tTnD15ps_3AkV3XgRWAQYMpB84akF
+ 
+ngrok http --url=purely-oriented-mastiff.ngrok-free.app 8080  > /dev/null 2>&1 &
+ 
+
+
+note: If you believe this is a mistake, please contact your Python installation or OS distribution provider. You can override this, at the risk of breaking your Python installation or OS, by passing --break-system-packages.
+
+hint: See PEP 668 for the detailed specification.
+
+###############################
+
+remember:
+
+sudo /etc/inid.d/doorlock start
+
+sudo /etc/inid.d/doorlock stop
+
+to start and stop the doorlock function
+
+--
+
+Doorlock will run from this directory, do not change this directory unless you
+
+are able to read what these scripts are doing and change it appropriately.
+ 
+    ... and remember, we're always happy for pull requests on github
+https://github.com/Jaycar-Electronics/Facial-Recognition-Door-Lock
+
+###############################
+
+Setup done, reboot or start the command as above.
+
+Your ip is:
+
+192.168.1.73
+ 
+Mastercard Foundation 2026 Internship (11 Months - Non-Extendable)
+ 
